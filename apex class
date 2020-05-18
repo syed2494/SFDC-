@@ -1,0 +1,8 @@
+public class UpdateModel {
+   
+@AuraEnabled
+    public static Team_Member_Profile__c fetchUser (String teamId){
+        system.debug([Select First_Name__c,Last_Name__c,Profile_Completion__c from Team_Member_Profile__c  where id=:teamId]);
+        return [Select First_Name__c,Last_Name__c,Profile_Completion__c from Team_Member_Profile__c  where id=:teamId limit 1];
+        
+    }  
