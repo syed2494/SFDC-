@@ -70,7 +70,7 @@
       </aura:set>
        
       <p class="slds-p-horizontal_small ">
-         <lightning:recordViewForm recordId= "{!v.recordId}" objectApiName="Team_Member_Profile__c">
+         <lightning:recordViewForm recordId= "a0n0k000001Wgd1AAC" objectApiName="Team_Member_Profile__c">
             
              
       <div class="slds-section slds-is-open" aura:id="Personal Information">
@@ -196,7 +196,7 @@
                <div>
                   <lightning:card iconName="standard:avatar" 
                      title="{! (v.recordId == null ? 'New ' : 'Edit') + 'Record Details' }" class="back">
-                     <lightning:recordEditForm aura:id="Form" recordId= "{!v.recordId}" objectApiName="Team_Member_Profile__c"  >
+                     <lightning:recordEditForm aura:id="Form" recordId= "a0n0k000001Wgd1AAC" objectApiName="Team_Member_Profile__c"  >
                          <lightning:messages/>
                                         <lightning:inputField fieldName="First_Name__c"     aura:id="Team_Member_Profile__c"/>
                                         <lightning:inputField fieldName="Date_of_Birth__c"   aura:id="Team_Member_Profile__c"/>
