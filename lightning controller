@@ -1,0 +1,80 @@
+ openmodal:function(component,event,helper) {
+        
+        var cmpTarget = component.find('Modalbox');
+        var cmpBack = component.find('Modalbackdrop');
+        $A.util.addClass(cmpTarget, 'slds-fade-in-open');
+        $A.util.addClass(cmpBack, 'slds-backdrop--open'); 
+    },    
+    updatemodal:function(component,event,helper) {
+     
+        var cmpTarget = component.find('Modalbox');
+        var cmpBack = component.find('Modalbackdrop');
+        $A.util.removeClass(cmpBack,'slds-backdrop--open');
+        $A.util.removeClass(cmpTarget, 'slds-fade-in-open');
+         
+        
+    },   
+     closeModal:function(component,event,helper){ 
+        
+        var cmpTarget = component.find('Modalbox');
+        var cmpBack = component.find('Modalbackdrop');
+        $A.util.removeClass(cmpBack,'slds-backdrop--open');
+        $A.util.removeClass(cmpTarget,'slds-fade-in-open'); 
+    },  
+     doInit : function(component, event, helper) {
+        
+        var loggedInUser;        
+        var action1 = component.get("c.fetchUser");
+        	
+        console.log('hii',component.get("v.recordId"));
+        
+        
+         action1.setParams({
+            teamId: component.get("v.recordId")
+        });
+        
+		    action1.setCallback(this, function(response){
+            var responsevalue =response.getReturnValue();
+               loggedInUser = response.getReturnValue();
+           console.log('responsee',responsevalue);
+             component.set('v.ProfileCompletion',responsevalue.Profile_Completion__c);
+              component.set('v.firstName',responsevalue.First_Name__c);
+                component.set('v.lastName',responsevalue.Last_Name__c);
+        }); 
+        
+        
+        $A.enqueueAction(action1);
+                           },   
+      
+      
+      
+    logout : function(component, event, helper) {
+        window.location = '/apex/vflight'
+    },
+    
+      
+      
+  
+    
+     toggleSection: function(component, event, helper) {
+        // dynamically get aura:id name from 'data-auraId' attribute
+        
+        var sectionAuraId = event.target.getAttribute("data-auraId");
+         
+        // get section Div element using aura:id
+        var sectionDiv = component.find(sectionAuraId).getElement();
+        /* The search() method searches for 'slds-is-open' class, and returns the position of the match.
+         * This method returns -1 if no match is found.
+        */
+        var sectionState = sectionDiv.getAttribute('class').search('slds-is-open'); 
+        
+        // -1 if 'slds-is-open' class is missing...then set 'slds-is-open' class else set slds-is-close class to element
+       
+        
+         
+        if(sectionState == -1){
+            sectionDiv.setAttribute('class' , 'slds-section slds-is-open');
+        }else{
+            sectionDiv.setAttribute('class' , 'slds-section slds-is-close');
+        }
+    }  
