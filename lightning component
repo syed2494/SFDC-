@@ -1,0 +1,229 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:hasrecordId,force:lightningQuickAction" access="global" controller="UpdateModel"> 
+
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="firstName" type="String"/>
+    <aura:attribute name="lastName" type="String"/>
+    <aura:attribute name="ProfileCompletion" type="String"/>
+    
+     <lightning:card class="myCord">
+          <div class="slds-float_right" style ="margin-top: -44px;margin-right: 16px;">
+         <lightning:button variant="brand" label="Logout"  iconPosition="centre"    onclick="{!c.logout}"/>
+      </div>    
+         <div class="slds-card__body" style ="border-top-style: solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border-left-width: 3px;
+    /* padding-top: 20px; */
+    margin-top: 43px;
+    border-style: SOLID;
+    border-width: thin;
+    color: rgb(21, 17, 17);
+    
+    height: 44px;">
+   
+               <lightning:card iconName="standard:avatar">
+              
+            
+         <div class="slds-clearfix">
+        <div class="slds-section" style ="margin-left: 58px;
+    font-size: medium;margin-bottom: -31px;margin-top: 1.1rem;color: rgbrgb(2, 1, 10);margin-top: -35px;">
+  
+    <p> {!v.firstName},{!v.lastName} 
+            </p> 
+    </div>
+            <div class="slds-section" style ="margin-left: 58px;
+    font-size: small;margin-bottom: -31px;margin-top: 1.1rem;color: rgbrgb(2, 1, 10);margin-top: 5px;">
+          
+             <br></br> Profile Completion[{!v.ProfileCompletion}%]
+              
+          
+            </div>
+            
+           
+    <!-- <div class="slds-clearfix">-->
+            
+
+   </div>
+                
+             </lightning:card> 
+   
+      <span class="slds-assistive-text">Collapse Panel Header</span>
+
+ 
+            
+         </div>
+    </lightning:card>
+            
+           
+   
+ 
+   
+
+  
+   <lightning:card class="myCord" >      
+    <aura:set attribute="actions">
+           <div class="slds-float_right">               
+         <lightning:button variant="brand" iconName="utility:save" iconPosition="centre" label="Edit" onclick= "{!c.openmodal}" />
+          </div>
+             
+      </aura:set>
+       
+      <p class="slds-p-horizontal_small ">
+         <lightning:recordViewForm recordId= "{!v.recordId}" objectApiName="Team_Member_Profile__c">
+            
+             
+      <div class="slds-section slds-is-open" aura:id="Personal Information">
+      <!--section header-->
+      <h3 class="slds-section__title">
+      <button aria-controls="InformationList" class="slds-button slds-section__title-action">
+      <span onclick="{!c.toggleSection}" data-auraId="Personal Information">
+      <lightning:icon iconName="utility:switch"
+         size="x-small"
+         class="slds-section__title-action-icon slds-button__icon_left"
+         alternativeText="button icon" 
+         />
+      </span>
+      <span class="slds-truncate " title="Personal Information">Personal Information</span>
+      </button>
+      </h3>
+      <div>
+      <div class="slds-section__content CUstPadding" id="InformationList">
+      <lightning:layout multipleRows="true">
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "First_Name__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Date_of_Birth__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Middle_Name__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Gender__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Last_Name__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Blood_Group__c" class= "design"/>
+      </lightning:layoutItem>
+      </lightning:layout>
+      </div>
+      </div>
+      </div>
+      <div class="slds-section slds-is-Close" aura:id="Employee Details">
+      <!--section header-->
+      <h3 class="slds-section__title">
+      <button aria-controls="DetailList" class="slds-button slds-section__title-action">
+      <span onclick="{!c.toggleSection}" data-auraId="Employee Details">
+      <lightning:icon iconName="utility:switch"
+         size="x-small"
+         class="slds-section__title-action-icon slds-button__icon_left"
+         alternativeText="button icon" 
+         />
+      </span>
+      <span class="slds-truncate" title="Employee Details">Employee Details</span>
+      </button>
+      </h3>
+      <div class="slds-section__content CUstPadding" id="DetailList">
+      <lightning:layout multipleRows="true">
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Name" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Designation__c" class= "design"/>
+      </lightning:layoutItem>
+      <!--<lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="1" padding="around-small">
+         <lightning:outputField fieldName= "Joining_Date__c" class= "design"/>
+         </lightning:layoutItem>-->
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Joining_Date__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Hiring_Location__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Manager__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Grade__c" class= "design"/>
+      </lightning:layoutItem>
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Last_Working_Date__c" class= "design"/>
+      </lightning:layoutItem>
+      </lightning:layout>
+      </div>
+      </div>
+             
+           <div class="slds-section slds-is-Close" aura:id="Addition Information">
+         <!--section header-->
+         <h3 class="slds-section__title">
+            <button aria-controls="Marital StatusList" class="slds-button slds-section__title-action">
+               <span onclick="{!c.toggleSection}" data-auraId="Addition Information">
+                  <lightning:icon iconName="utility:switch"
+                     size="x-small"
+                     class="slds-section__title-action-icon slds-button__icon_left"
+                     alternativeText="button icon" 
+                     />
+               </span>
+               <span class="slds-truncate" title="Addition Information">Addition Information</span>
+            </button>
+         </h3>
+         <!--section body-->
+         <div class="slds-section__content CUstPadding" id="Marital StatusList">
+            <lightning:layout multipleRows="true">
+      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "Marital_Status__c" class= "design"/>
+       </lightning:layoutItem>   
+       <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+      <lightning:outputField fieldName= "National_Skills_Registry__c" class= "design"/>
+       </lightning:layoutItem> 
+             </lightning:layout>
+          </div>
+       </div>
+          </lightning:recordViewForm>
+       </p>  
+       
+      <!--<lightning:button variant="brand" iconName="utility:save" iconPosition="centre" label="Edit" onclick= "{!c.openmodal}"/>-->
+      <div role="dialog"  aria-labelledby="header43" aura:id="Modalbox" class="slds-modal">
+         <div class="slds-modal__container">
+            <div class="slds-modal__header">
+               <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModal }" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+               <h2 id="header43" class="slds-text-heading--medium">Edit Record</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+               <div>
+                  <lightning:card iconName="standard:avatar" 
+                     title="{! (v.recordId == null ? 'New ' : 'Edit') + 'Record Details' }" class="back">
+                     <lightning:recordEditForm aura:id="Form" recordId= "{!v.recordId}" objectApiName="Team_Member_Profile__c"  >
+                         <lightning:messages/>
+                                        <lightning:inputField fieldName="First_Name__c"     aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Date_of_Birth__c"   aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Middle_Name__c"     aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Gender__c"          aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Last_Name__c"       aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Blood_Group__c"     aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Name"               aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Designation__c"     aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Joining_Date__c"    aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Hiring_Location__c"  aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Manager__c"           aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Grade__c"              aura:id="Team_Member_Profile__c"/>        
+                                        <lightning:inputField fieldName="Last_Working_Date__c"  aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="Marital_Status__c"      aura:id="Team_Member_Profile__c"/>
+                                        <lightning:inputField fieldName="National_Skills_Registry__c"  aura:id="Team_Member_Profile__c"/>
+                        <div class="slds-m-top_medium">
+                           <lightning:button variant="brand"  iconPosition="left" label="Save" type="submit" onclick= "{!c.updatemodal}"/>
+                           <lightning:button variant="brand"  iconPosition="left" label="Cancel" onclick= "{!c.closeModal}"/>
+                        </div>
+                     </lightning:recordEditForm>
+                  </lightning:card>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="slds-backdrop " aura:id="Modalbackdrop"></div>
+   
+   </lightning:card>
+   </aura:component>
